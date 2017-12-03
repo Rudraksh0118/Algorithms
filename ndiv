@@ -1,0 +1,62 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main() {
+	int a,b,n;
+	cin>>a>>b>>n;
+	int t=(int)sqrt(b);
+	int fcount=0;
+	int *prime;
+	prime =new int [t];
+	int *arr;
+	arr=new int [t];
+	for(int i=0;i<t;i++)
+	arr[i]=i+1;
+	for(int i=2;i<=(int)sqrt(t);i++)
+	{
+		if(arr[i-1]==-1)
+		continue;
+	    int q=i;
+	    while(q<=t)
+	    {q=q+i;
+	    arr[q-1]=-1;
+	    }
+	}
+	int j=0;
+	for(int i=0;i<t;i++)
+	{
+		if(arr[i]==1)
+		continue;
+		if(arr[i]!=-1)
+		{
+		  prime[j]=arr[i];
+		  j++;
+		}
+	}
+	for(int i=a;i<=b;i++)
+	{
+		int ndiv=1;
+		int spn=1;
+		int temp=i;
+		for(int h=0;h<j;h++)
+		{
+			if(i%prime[h]!=0)
+			continue;
+			int count=0;
+			temp=i;
+			while(temp%prime[h]==0)
+			{
+			count++;
+		           temp=temp/prime[h];
+		            }
+		    ndiv=ndiv*(count+1);
+		    spn=spn*pow(prime[h],count);
+		}
+		if((i/spn)>1)
+		ndiv=2*ndiv;
+		if(ndiv==n)
+		fcount++;
+	}
+	cout<<fcount;
+	return 0;
+}
